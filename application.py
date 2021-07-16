@@ -4,7 +4,7 @@ import pandas as pd
 
 application = Flask(__name__)
 
-@app.route('/predict', methods=['POST'])
+@application.route('/predict', methods=['POST'])
 def predict():
 	features_json = request.json
 	query = pd.DataFrame(features_json)
@@ -15,9 +15,9 @@ def predict():
 	return jsonify({'prediction': str(prediction)})
 	
 	
-@app.route('/status', methods=['GET'])
+@application.route('/status', methods=['GET'])
 def status():
-	return jsonify({'status': 'ok'})
+	return '<html><body>status ok </body></html>'
 	
 if __name__ == '__main__':
 	model = joblib.load("model.pkl")
