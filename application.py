@@ -16,7 +16,7 @@ def predict():
 	
 	
 @app.route('/status', methods=['GET'])
-def status()
+def status():
 	return jsonify({'status': 'ok'})
 	
 if __name__ == '__main__':
