@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -23,4 +23,4 @@ if __name__ == '__main__':
 	model = joblib.load("model.pkl")
 	col_names = joblib.load('column_names.pkl')
 	
-	app.run(debug=True)
+	application.run(debug=True)
