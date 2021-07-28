@@ -3,15 +3,19 @@ import joblib
 import pandas as pd
 import json
 import boto3
+import logging
 from io import BytesIO
 from io import StringIO
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 application = Flask(__name__)
 
 
 @application.route('/predict', methods=['POST'])
 def predict():
-    print(f'json: {request.json}')
+    logger.info(f'json: {request.json}')
     features_json = request.json
 
     features_df = load_features(features_json['s3_key'], features_json['s3_bucket'])
