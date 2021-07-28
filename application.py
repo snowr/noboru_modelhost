@@ -11,6 +11,7 @@ application = Flask(__name__)
 
 @application.route('/predict', methods=['POST'])
 def predict():
+    print(f'json: {request.json}')
     features_json = request.json
 
     features_df = load_features(features_json['s3_key'], features_json['s3_bucket'])
