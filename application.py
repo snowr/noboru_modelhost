@@ -14,9 +14,9 @@ def predict():
     features_json = request.json
 
     features_df = load_features(features_json['s3_key'], features_json['s3_bucket'])
-    prediction = list(model.predif(features_df))
+    conf = feed_model(features_df)
 
-    return jsonify({'prediction': str(prediction)})
+    return jsonify({'conf_0': conf[0], 'conf_1': conf[1]})
 
 
 @application.route('/status', methods=['GET'])
@@ -24,6 +24,7 @@ def status():
     return '<html><body>status ok </body></html>'
 
 
+# returns array[conf_zero, conf_1]
 def feed_model(features_df, save_features=False):
     model = joblib.load("logreg.joblib")
     col_names = joblib.load('col_names.pkl')
