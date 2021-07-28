@@ -65,7 +65,7 @@ def load_features(s3_key, s3_bucket):
 
 
 if __name__ == '__main__':
-    model = joblib.load("model.pkl")
-    col_names = joblib.load('column_names.pkl')
+    # model = joblib.load("model.pkl")
+    # col_names = joblib.load('column_names.pkl')
 
     application.run(debug=True)
