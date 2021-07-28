@@ -35,6 +35,12 @@ def feed_model(features_df, save_features=False):
     col_names = joblib.load('col_names.pkl')
 
     application.logger.info(f'features_df before trim {len(features_df.columns.values)}')
+    s3_client = boto3.client('s3')
+    response = s3_client.put_object(
+        Body=json.dumps(features_df.columns.values),
+        Bucket='noborudv.testdata',
+        Key=f'wtf.json',
+    )
     # https://stackoverflow.com/questions/51663071/sklearn-fit-vs-predict-order-of-columns-matters
     features_df = features_df.drop(['TradingDateTimestamp', 'TradingDate', 'stock_price',
                                     'Unnamed: 0',
