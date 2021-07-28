@@ -34,8 +34,8 @@ def feed_model(features_df, save_features=False):
     model = joblib.load("logreg.joblib")
     col_names = joblib.load('col_names.pkl')
 
+    logger.info(f'features_df before trim {len(features_df.columns.values)}')
     # https://stackoverflow.com/questions/51663071/sklearn-fit-vs-predict-order-of-columns-matters
-
     features_df = features_df.drop(['TradingDateTimestamp', 'TradingDate', 'stock_price',
                                     'Unnamed: 0',
                                     'call_volume',
@@ -90,6 +90,8 @@ def feed_model(features_df, save_features=False):
                                     'stock_volume_60_delta_to_mean',
                                     'stock_volume_60_stddev',
                                     ], axis=1, errors='ignore')
+    logger.info(f'features_df after trim {len(features_df.columns.values)}')
+    logger.info(f'model col length: {(len(col_names))}')
     features_df = features_df[col_names]
 
     print(features_df.columns)
