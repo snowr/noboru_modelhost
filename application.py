@@ -35,6 +35,8 @@ def feed_model(features_df, save_features=False):
     col_names = joblib.load('col_names.pkl')
 
     # https://stackoverflow.com/questions/51663071/sklearn-fit-vs-predict-order-of-columns-matters
+    features_df = features_df.drop(['TradingDateTimestamp', 'TradingDate', 'stock_price', 'put_volume',
+                                    'call_volume', 'stock_volume'], axis=1, errors='ignore')
     features_df = features_df[col_names]
 
     print(features_df.columns)
